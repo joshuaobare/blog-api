@@ -4,18 +4,16 @@ import { useEffect, useState } from 'react';
 
 function App() {
 
-  const posts = useState({});
+  const [posts, setPosts] = useState([]);
 
   useEffect(()=> {
     fetchPosts()
   }, [])
 
   const fetchPosts = async() => {
-    const unparsedPosts = await fetch("http://localhost:3000/posts")
-    console.log(unparsedPosts)
-    const posts = await unparsedPosts.json()
-
-    console.log(posts)
+    const postsResponse = await fetch("http://localhost:3000/posts")    
+    const posts = await postsResponse.json()
+    setPosts(posts)
 
   }
 
