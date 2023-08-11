@@ -8,4 +8,8 @@ const PostSchema = new Schema({
   published: { type: Boolean, required: true },
 });
 
+PostSchema.virtual('url').get(function() {
+  return `/posts/post/${this._id}`
+})
+
 module.exports = mongoose.model("Post", PostSchema);
