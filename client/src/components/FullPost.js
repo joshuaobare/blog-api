@@ -8,6 +8,7 @@ export default function FullPost(props) {
   const [postData, setPostData] = useState({});
   const [postComments, setPostComments] = useState([]);
   const [postId, setPostId] = useState("");
+  const [newComment, setNewComment] = useState({ text: ""})
   const { id } = useParams();
 
   const fetchPostData = async () => {
@@ -21,6 +22,12 @@ export default function FullPost(props) {
     fetchPostData();
   }, []);
 
+
+  const handleChange = (e) => {
+    setNewComment((prevState) => { 
+        return {...prevState, [e.target.name]: e.target.value}})
+  }
+
   return (
     <div>
       <h1>{postData.title}</h1>
@@ -32,7 +39,7 @@ export default function FullPost(props) {
       <form method="post">
         <div className="form-group">
           <label htmlFor="text">Text</label>
-          <textarea type="text" className="form-control text" name="text" id="text"></textarea>
+          <textarea onChange={handleChange} value={newComment.text} type="text" className="form-control text" name="text" id="text"></textarea>
         </div>
         <div className="form-group">
             <button className="btn btn-primary">Submit</button>
