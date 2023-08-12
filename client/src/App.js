@@ -2,34 +2,22 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import NavBar from "./components/NavBar.js";
 import Post from "./components/Post.js";
-import FullPost from "./components/FullPost"
+import FullPost from "./components/FullPost";
+import Home from "./components/Home";
 import uniqid from "uniqid";
+import { HashRouter, Routes, Route, BrowserRouter } from "react-router-dom";
 
 function App() {
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    fetchPosts();
-  }, []);
-
-  const fetchPosts = async () => {
-    const postsResponse = await fetch("http://localhost:3000/posts");
-    const posts = await postsResponse.json();
-    setPosts(posts);
-  };
-
   return (
     <div className="App">
-      <NavBar />
-      {/*<h1>All Posts</h1>
-      <div className="posts-grid">
-        {posts.map((post) => (
-          <Post 
-            key={uniqid()} 
-            post={post} 
-          />
-        ))}       
-        </div> */}
+      <BrowserRouter basename="/">
+        <NavBar />
+        <Routes>
+          <Route path="/" exact element={<Home />} />
+          <Route path="/posts/post/:id" element={<FullPost />} />
+          
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
