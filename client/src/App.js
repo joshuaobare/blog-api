@@ -2,6 +2,7 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import NavBar from "./components/NavBar.js";
 import Post from "./components/Post.js";
+import FullPost from "./components/FullPost"
 import uniqid from "uniqid";
 
 function App() {
@@ -20,16 +21,15 @@ function App() {
   return (
     <div className="App">
       <NavBar />
-      <h1>All Posts</h1>
+      {/*<h1>All Posts</h1>
       <div className="posts-grid">
         {posts.map((post) => (
           <Post 
             key={uniqid()} 
             post={post} 
           />
-        ))}
-        
-      </div>
+        ))}       
+        </div> */}
     </div>
   );
 }
