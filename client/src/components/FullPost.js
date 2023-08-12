@@ -28,6 +28,10 @@ export default function FullPost(props) {
         return {...prevState, [e.target.name]: e.target.value}})
   }
 
+  const handleSubmit = (e) => {
+
+  }
+
   return (
     <div>
       <h1>{postData.title}</h1>
@@ -36,7 +40,7 @@ export default function FullPost(props) {
       {postComments.map((comment) => (
         <Comment key={comment._id} comment={comment} />
       ))}
-      <form method="post">
+      <form method="post" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="text">Text</label>
           <textarea onChange={handleChange} value={newComment.text} type="text" className="form-control text" name="text" id="text"></textarea>
