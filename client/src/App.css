@@ -36,6 +36,11 @@
   grid-template-columns: repeat(2, .25fr);
 }
 
+.text {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
