@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Comment from "./Comment"
 
 export default function FullPost(props) {
   const [postData, setPostData] = useState({});
@@ -24,6 +25,9 @@ export default function FullPost(props) {
       <h1>{postData.title}</h1>
       <p>{postData.text}</p>
       <h3>Comments</h3>
+      {
+          postComments.map(comment => <Comment comment={comment}/>)
+      }
     </div>
   );
 }
