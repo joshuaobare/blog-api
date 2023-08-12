@@ -8,8 +8,8 @@ export default function FullPost(props) {
   const [postData, setPostData] = useState({});
   const [postComments, setPostComments] = useState([]);
   const [postId, setPostId] = useState("");
-  const [newComment, setNewComment] = useState({ text: ""})
   const { id } = useParams();
+  const [newComment, setNewComment] = useState({ text: "", postId: id });
 
   const fetchPostData = async () => {
     const postResponse = await fetch(`http://localhost:3000/posts/post/${id}`);
@@ -22,15 +22,29 @@ export default function FullPost(props) {
     fetchPostData();
   }, []);
 
-
   const handleChange = (e) => {
-    setNewComment((prevState) => { 
-        return {...prevState, [e.target.name]: e.target.value}})
-  }
+    setNewComment((prevState) => {
+      return { ...prevState, [e.target.name]: e.target.value };
+    });
+  };
 
-  const handleSubmit = (e) => {
-
-  }
+  const handleSubmit = async (e) => {
+    try {
+      console.log(id);
+      const response = await fetch(`http://localhost:3000/posts/post/${id}`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(newComment),
+      });
+      if (response.status !== 200) {
+        return;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div>
@@ -40,15 +54,22 @@ export default function FullPost(props) {
       {postComments.map((comment) => (
         <Comment key={comment._id} comment={comment} />
       ))}
-      <form method="post" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="text">Text</label>
-          <textarea onChange={handleChange} value={newComment.text} type="text" className="form-control text" name="text" id="text"></textarea>
+          <textarea
+            onChange={handleChange}
+            value={newComment.text}
+            type="text"
+            className="form-control text"
+            name="text"
+            id="text"
+          ></textarea>
+          <input type="hidden" name="postId" value={id} />
         </div>
         <div className="form-group">
-            <button className="btn btn-primary">Submit</button>
+          <button className="btn btn-primary">Submit</button>
         </div>
-
       </form>
     </div>
   );

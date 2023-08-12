@@ -1,7 +1,7 @@
 const Post = require("../models/postsModel");
 const Comment = require("../models/commentsModel")
 const asyncHandler = require("express-async-handler");
-const {body, validationResult } = require("express-validation")
+const {body, validationResult } = require("express-validator")
 
 exports.posts_get = asyncHandler(async (req, res, next) => {
   const posts = await Post.find({}).exec();
@@ -30,12 +30,13 @@ exports.create_comment = [
       text,
       postId
     })
-
+    console.log(!errors.isEmpty())
     if(!errors.isEmpty()){
-      res.json(errors)
+      res.json({errors: errors.array()})
+      return;
     }else {
       await comment.save()
-      return;
+      
     }
 
 
