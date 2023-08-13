@@ -26,17 +26,24 @@ exports.create_user = [
     const errors = validationResult(req);
     const { name, password, email } = req.body;
 
-    const user = new User({
-      name,
-      password,
-      email,
-    });
-
-    if (!errors.isEmpty) {
-      res.json({ errors: errors.array() });
-      return;
-    } else {
-      await user.save();
-    }
+    bcrypt.hash(password, 10, async (err, hashedPassword) => {
+        if(err){
+            console.log(err)
+        }else {
+            const user = new User({
+                name,
+                hashedPassword,
+                email,
+              });
+          
+              if (!errors.isEmpty) {
+                res.json({ errors: errors.array() });
+                return;
+              } else {
+                await user.save();
+              }
+        }
+      });
+    
   }),
 ];
