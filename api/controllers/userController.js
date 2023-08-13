@@ -2,6 +2,7 @@ const User = require("../models/userModel");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
+const passport = require("passport")
 
 exports.create_user = [
   body("name")
@@ -27,23 +28,27 @@ exports.create_user = [
     const { name, password, email } = req.body;
 
     bcrypt.hash(password, 10, async (err, hashedPassword) => {
-        if(err){
-            console.log(err)
-        }else {
-            const user = new User({
-                name,
-                hashedPassword,
-                email,
-              });
-          
-              if (!errors.isEmpty) {
-                res.json({ errors: errors.array() });
-                return;
-              } else {
-                await user.save();
-              }
+      if (err) {
+        console.log(err);
+      } else {
+        const user = new User({
+          name,
+          hashedPassword,
+          email,
+        });
+
+        if (!errors.isEmpty) {
+          res.json({ errors: errors.array() });
+          return;
+        } else {
+          await user.save();
         }
-      });
-    
+      }
+    });
   }),
 ];
+
+exports.login_user = passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect:"/users/login"
+})
