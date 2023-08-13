@@ -20,7 +20,8 @@ exports.post_get = asyncHandler(async (req, res, next) => {
 
 exports.create_comment = [
   body("text")
-  .isLength({min: 1}),
+  .isLength({min: 1})
+  .withMessage("Comment too short"),
 
   asyncHandler(async (req,res,next) => {
     const errors = validationResult(req)
@@ -30,7 +31,7 @@ exports.create_comment = [
       text,
       postId
     })
-    console.log(!errors.isEmpty())
+    
     if(!errors.isEmpty()){
       res.json({errors: errors.array()})
       return;
