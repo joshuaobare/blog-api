@@ -41,6 +41,33 @@
   margin-bottom: 10px;
 }
 
+.homepage-post-title {
+  height: 75px;
+  overflow: hidden;
+}
+
+.homepage-post-text {
+  height:100px;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  
+}
+
+.full-post-form {
+  margin-top: 20px;
+}
+
+.full-post-text {
+  width: 60vw;
+}
+
+.full-post {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

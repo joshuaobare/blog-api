@@ -47,16 +47,22 @@ export default function FullPost(props) {
   };
 
   return (
-    <div>
+    <div className="full-post">
       <h1>{postData.title}</h1>
-      <p>{postData.text}</p>
+      <p className="full-post-text">{postData.text}</p>
       <h3>Comments</h3>
-      {postComments.map((comment) => (
-        <Comment key={comment._id} comment={comment} />
-      ))}
-      <form onSubmit={handleSubmit}>
+      {postComments.length !== 0 ? (
+        postComments.map((comment) => (
+          <Comment key={comment._id} comment={comment} />
+        ))
+      ) : (
+        <div>No Comments</div>
+      )}
+      <form onSubmit={handleSubmit} className="full-post-form">
         <div className="form-group">
-          <label htmlFor="text">Text</label>
+          <label htmlFor="text">
+            <b>Add Comment</b>
+          </label>
           <textarea
             onChange={handleChange}
             value={newComment.text}
