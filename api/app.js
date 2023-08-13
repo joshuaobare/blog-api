@@ -9,8 +9,9 @@ require("dotenv").config();
 const LocalStrategy = require("passport-local").Strategy;
 const session = require("express-session");
 const passport = require("passport");
-const User = require("./models/users");
+const User = require("./models/userModel");
 const bcrypt = require("bcryptjs");
+const jwt = require('jsonwebtoken')
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");

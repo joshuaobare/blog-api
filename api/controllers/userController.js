@@ -3,6 +3,7 @@ const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const passport = require("passport")
+const jwt = require('jsonwebtoken')
 
 exports.create_user = [
   body("name")
@@ -48,7 +49,11 @@ exports.create_user = [
   }),
 ];
 
-exports.login_user = passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect:"/users/login"
+exports.login_user = asyncHandler(async (req, res, next) => {
+    passport.authenticate("local", {
+        successRedirect: "/",
+        failureRedirect:"/users/login"
+    })
 })
+
+
