@@ -1,15 +1,22 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import { Link } from "react-router-dom";
 
 export default function NavBar(props) {
   return (
     <>
       <Navbar bg="dark" data-bs-theme="dark">
         <Container>
-          <Navbar.Brand href="#home">Echoes</Navbar.Brand>
+          <Link to="/">
+            <Navbar.Brand href="#home">Echoes</Navbar.Brand>
+          </Link>
+
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
+            <Link to="/">
+              <Nav.Link href="#home">Home</Nav.Link>
+            </Link>
+
             <Nav.Link href="#features">Features</Nav.Link>
             <Nav.Link href="#pricing">Pricing</Nav.Link>
           </Nav>

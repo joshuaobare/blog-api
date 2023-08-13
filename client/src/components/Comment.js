@@ -1,9 +1,9 @@
 export default function Comment(props) {
     return (
         <div>
-            <p>Anon</p>
-            <p>{props.comment.text}</p>
-            <p>{props.comment.timestamp}</p>
+            <div>Anon</div>
+            <div>{props.comment.text}</div>
+            <div>{props.comment.timestamp}</div>
         </div>
 
     )

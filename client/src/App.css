@@ -29,11 +29,10 @@
 }
 
 .posts-grid {
-  display: grid;
-  justify-content:center;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  /*gap:10px; */
-  grid-template-columns: repeat(2, .25fr);
+  gap: 10px;
 }
 
 .text {
@@ -45,12 +44,13 @@
   height: 75px;
   overflow: hidden;
 }
-
+.homepage-post-title > div {
+  font-weight: bolder;
+}
 .homepage-post-text {
-  height:100px;
-  overflow:hidden;
+  height: 100px;
+  overflow: hidden;
   text-overflow: ellipsis;
-  
 }
 
 .full-post-form {
@@ -66,6 +66,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 10px;
 }
 
 @keyframes App-logo-spin {
