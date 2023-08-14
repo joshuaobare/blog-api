@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function SignUp() {
   const [userData, setUserData] = useState({
@@ -8,6 +8,10 @@ export default function SignUp() {
     confirmPassword: "",
   });
 
+  useEffect(()=>{
+
+  }, [userData])
+
   const handleChange = (e) => {
     setUserData((prevState) => {
       return { ...prevState, [e.target.name]: e.target.value };
@@ -15,18 +19,34 @@ export default function SignUp() {
   };
 
   const handleSubmit = async (e) => {
+      console.log("submitted")
+    e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3000/admin/create", {
+        console.log("response");
+        const response = await fetch("http://localhost:3000/admin/create", {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(userData),
       });
-      if (response.status !== 200) {
+      console.log(response)
+      console.log("try section 1")
+      /*if (response.status !== 200) {
+        const err = await response.json();
+        console.log(err);
         return;
-      }
+      } */
+      console.log("try section 2")
+      
     } catch (error) {
       console.error(error);
     }
+    setUserData({
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
+      console.log("function end")
   };
 
   return (
@@ -41,6 +61,7 @@ export default function SignUp() {
             name="name"
             id="name"
             onChange={handleChange}
+            value={userData.name}
           />
         </div>
         <div className="form-group">
@@ -51,16 +72,18 @@ export default function SignUp() {
             id="email"
             name="email"
             onChange={handleChange}
+            value={userData.email}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="">Password</label>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             className="form-control"
             id="password"
             name="password"
             onChange={handleChange}
+            value={userData.password}
           />
         </div>
         <div className="form-group">
@@ -71,6 +94,7 @@ export default function SignUp() {
             id="confirmPassword"
             name="confirmPassword"
             onChange={handleChange}
+            value={userData.confirmPassword}
           />
         </div>
         <div className="form-group">

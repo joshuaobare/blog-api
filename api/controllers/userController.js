@@ -34,15 +34,16 @@ exports.create_user = [
       } else {
         const user = new User({
           name,
-          hashedPassword,
+          password: hashedPassword,
           email,
         });
 
-        if (!errors.isEmpty) {
+        if (!errors.isEmpty()) {
           res.json({ errors: errors.array() });
           return;
         } else {
           await user.save();
+          return;
         }
       }
     });
