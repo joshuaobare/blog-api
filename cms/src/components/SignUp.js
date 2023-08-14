@@ -8,9 +8,7 @@ export default function SignUp() {
     confirmPassword: "",
   });
 
-  useEffect(()=>{
-
-  }, [userData])
+  useEffect(() => {}, [userData]);
 
   const handleChange = (e) => {
     setUserData((prevState) => {
@@ -19,34 +17,29 @@ export default function SignUp() {
   };
 
   const handleSubmit = async (e) => {
-      console.log("submitted")
+    console.log("submitted");
     e.preventDefault();
     try {
-        console.log("response");
-        const response = await fetch("http://localhost:3000/admin/create", {
+      console.log("response");
+      const response = await fetch("http://localhost:3000/admin/create", {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(userData),
       });
-      console.log(response)
-      console.log("try section 1")
-      /*if (response.status !== 200) {
-        const err = await response.json();
-        console.log(err);
-        return;
-      } */
-      console.log("try section 2")
-      
+
+      const data = await response.json();
+      console.log(data);
+      console.log("try section 2");
     } catch (error) {
       console.error(error);
     }
     setUserData({
-        name: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      });
-      console.log("function end")
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    });
+    console.log("function end");
   };
 
   return (

@@ -43,7 +43,7 @@ exports.create_user = [
           return;
         } else {
           await user.save();
-          return;
+          res.json({ message: "User created successfully" });
         }
       }
     });
@@ -51,11 +51,24 @@ exports.create_user = [
 ];
 
 exports.login_user = asyncHandler(async (req, res, next) => {
-  passport.authenticate("local");
+  passport.authenticate("local", async (err, user, info) => {
+    try {
+      if (err || !user) {
+        const error = new Error("An error occurred.");
 
-  jwt.sign({ user: req.user }, "secretkey", (err, token) => {
-    res.json({ token });
-  });
+        return next(error);
+      }
+
+      req.login(user, { session: false }, async (error) => {
+        if (error) return next(error);
+
+        jwt.sign({ user: req.user }, "secretkey", (err, token) => {
+          res.json({ token });
+        });
+        
+      });
+    } catch (error) {
+      return next(error);
+    }
+  })(req, res, next);
 });
-
-
