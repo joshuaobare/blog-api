@@ -30,14 +30,13 @@ export default function Login() {
       setUserData({
         email: "",
         password: "",
-      })
-    
+      })    
   }
 
   return (
     <div className="login">
       <h1>Login Page</h1>
-      <form action="" method='post' className="login-form" onSubmit={handleSubmit}>
+      <form action="" method="post" className="login-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="email">Email</label>
           <input
