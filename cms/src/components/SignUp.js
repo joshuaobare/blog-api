@@ -14,10 +14,25 @@ export default function SignUp() {
     });
   };
 
+  const handleSubmit = async (e) => {
+    try {
+      const response = await fetch("http://localhost:3000/admin/create", {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify(userData),
+      });
+      if (response.status !== 200) {
+        return;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="sign-up">
       <h1>Sign Up</h1>
-      <form action="" className="signup-form" >
+      <form action="" className="signup-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Name</label>
           <input
