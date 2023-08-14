@@ -63,9 +63,8 @@ exports.login_user = asyncHandler(async (req, res, next) => {
         if (error) return next(error);
 
         jwt.sign({ user: req.user }, "secretkey", (err, token) => {
-          res.json({ token });
+          res.json({ token, user: req.user });
         });
-        
       });
     } catch (error) {
       return next(error);
