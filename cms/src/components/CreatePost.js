@@ -1,4 +1,18 @@
+import { useState } from "react";
+
 export default function CreatePost() {
+  const [formData, setFormData] = useState({
+      title:"",
+      text:"",
+      published:false,
+      authorName:""
+
+  });
+
+  const handleChange = (e) => {
+      
+  }
+
   return (
     <div className="create-post">
       <h1>Create Post</h1>
@@ -20,13 +34,18 @@ export default function CreatePost() {
           <fieldset>
             <legend>published</legend>
             <label htmlFor="published">Yes</label>
-            <input type="radio" value={true} name="published" id="published"/>
+            <input type="radio" value={true} name="published" id="published" />
             <label htmlFor="unpublished">No</label>
-            <input type="radio" value={false} name="published" id="unpublished"/>
+            <input
+              type="radio"
+              value={false}
+              name="published"
+              id="unpublished"
+            />
           </fieldset>
         </div>
         <div className="form-group">
-            <button className="btn btn-primary">Submit</button>
+          <button className="btn btn-primary">Submit</button>
         </div>
       </form>
     </div>
