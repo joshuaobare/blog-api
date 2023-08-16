@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function Login() {
+export default function Login(props) {
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -14,30 +14,14 @@ export default function Login() {
     
   };
 
-  const handleSubmit = async (e) => {
-      e.preventDefault()
-      try {
-        const response = await fetch("http://localhost:3000/admin/login", {
-            method:'POST',
-            headers: { "Content-type": "application/json" },
-            body: JSON.stringify(userData),
-        })
-        const data = await response.json()
-        localStorage.setItem("token", data.token)
-        localStorage.setItem("user", data.user)
-      } catch(err){
-          console.error(err)
-      }
-      setUserData({
-        email: "",
-        password: "",
-      })    
-  }
+  
 
   return (
     <div className="login">
       <h1>Login Page</h1>
-      <form action="" method="post" className="login-form" onSubmit={handleSubmit}>
+      {!props.loggedIn ? 
+
+      <form action="" method="post" className="login-form" onSubmit={(e) => props.loginHandleSubmit(e, userData)}>
         <div className="form-group">
           <label htmlFor="email">Email</label>
           <input
@@ -63,7 +47,11 @@ export default function Login() {
         <div className="form-group">
           <button className="btn btn-primary">Submit</button>
         </div>
-      </form>
+      </form> :
+      
+      <div>You are already logged in...</div>
+      
+      }
     </div>
   );
 }
