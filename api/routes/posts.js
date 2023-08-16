@@ -9,5 +9,4 @@ router.get("/post/:id", postController.post_get)
 
 router.post("/post/comment", commentController.create_comment)
 
-router.put("/post/:id", postController.update_post)
 module.exports = router;
