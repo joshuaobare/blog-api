@@ -15,6 +15,7 @@ function App() {
     password: "",
   });
   const [loginError, setLoginError] = useState(false)
+  const [editPost, setEditPost] = useState(false)
   
   useEffect(() => {
     const token = localStorage.getItem("token");

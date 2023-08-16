@@ -18,7 +18,6 @@ exports.post_get = asyncHandler(async (req, res, next) => {
   res.json({ post, comments });
 });
 
-
 exports.create_post = [
   body("title").trim().escape().isLength({ min: 1 }),
   body("text").trim().escape().isLength({ min: 1 }),
@@ -27,7 +26,6 @@ exports.create_post = [
     const errors = validationResult(req);
     const { text, title, authorName, published } = req.body;
 
-    
     const post = new Post({
       text,
       title,
@@ -41,6 +39,35 @@ exports.create_post = [
     } else {
       await post.save();
       res.json({ message: "Post created successfully" });
+    }
+  }),
+];
+
+exports.update_post = [
+  body("title").trim().escape().isLength({ min: 1 }),
+  body("text").trim().escape().isLength({ min: 1 }),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    const { text, title, authorName, published } = req.body;
+    const { id } = req.params;
+
+    const post = Post.findOneAndUpdate(
+      { _id: id },
+      {
+        text,
+        title,
+        authorName,
+        published,
+      }
+    );
+
+    if (!errors.isEmpty()) {
+      res.json({ errors: errors.array() });
+      return;
+    } else {
+      await post.save();
+      res.json({ message: "Post updated successfully" });
     }
   }),
 ];

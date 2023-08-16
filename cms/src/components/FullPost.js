@@ -78,7 +78,7 @@ export default function FullPost(props) {
         )}
       </div>
 
-      <form onSubmit={handleSubmit} className="full-post-form">
+      <form onSubmit={handleSubmit} className="full-post-form" method='post'>
         <div className="form-group">
           <label htmlFor="text">
             <b>Add Comment</b>
