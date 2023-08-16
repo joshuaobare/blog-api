@@ -51,7 +51,7 @@ export default function FullPost(props) {
       <h1>{postData.title}</h1>
       <div className="full-post-byline">
         <div><b>{postData.authorName}</b> <span className="full-post-author-span">Contributor</span> </div>
-        <div>
+        <div className="full-post-author-span">
           {new Date(postData.timestamp).toLocaleDateString("en-us", {
             weekday: "long",
             year: "numeric",
