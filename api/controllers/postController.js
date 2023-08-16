@@ -71,3 +71,12 @@ exports.update_post = [
     }
   }),
 ];
+
+exports.delete_post = asyncHandler(async (req, res, next) => {
+  const { id } = req.params;
+
+  const post = Post.findOneAndDelete({ _id: id });
+
+  await post.exec();
+  res.json({ message: "Post deleted successfully" });
+});
