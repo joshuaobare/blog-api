@@ -69,6 +69,11 @@ export default function FullPost(props) {
         </Link>        
       </div>
       <p className="full-post-text">{postData.text}</p>
+      <div className="full-post-edit-btn-cont">
+        <Link to={`/posts/edit/${id}`}>
+        <button className="btn btn-danger">Delete Post</button>
+        </Link>        
+      </div>
       <h3>Comments</h3>
       <div className="full-post-comments">
         {postComments.length !== 0 ? (
