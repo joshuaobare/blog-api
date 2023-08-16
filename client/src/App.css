@@ -80,6 +80,11 @@
   font-size: 14px;
 }
 
+.full-post-comments {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
 @keyframes App-logo-spin {
   from {

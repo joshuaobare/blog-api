@@ -50,7 +50,10 @@ export default function FullPost(props) {
     <div className="full-post">
       <h1>{postData.title}</h1>
       <div className="full-post-byline">
-        <div><b>{postData.authorName}</b> <span className="full-post-author-span">Contributor</span> </div>
+        <div>
+          <b>{postData.authorName}</b>{" "}
+          <span className="full-post-author-span">Contributor</span>{" "}
+        </div>
         <div className="full-post-author-span">
           {new Date(postData.timestamp).toLocaleDateString("en-us", {
             weekday: "long",
@@ -65,13 +68,16 @@ export default function FullPost(props) {
       </div>
       <p className="full-post-text">{postData.text}</p>
       <h3>Comments</h3>
-      {postComments.length !== 0 ? (
-        postComments.map((comment) => (
-          <Comment key={comment._id} comment={comment} />
-        ))
-      ) : (
-        <div>No Comments</div>
-      )}
+      <div className="full-post-comments">
+        {postComments.length !== 0 ? (
+          postComments.map((comment) => (
+            <Comment key={comment._id} comment={comment} />
+          ))
+        ) : (
+          <div>No Comments</div>
+        )}
+      </div>
+
       <form onSubmit={handleSubmit} className="full-post-form">
         <div className="form-group">
           <label htmlFor="text">

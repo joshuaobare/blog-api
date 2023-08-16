@@ -103,6 +103,24 @@
   justify-content: flex-end;
   margin-bottom: 10px;
 }
+
+.Comment{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.btn-danger.delete-comment-btn {
+  font-size: 14px;
+}
+
+.full-post-comments {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
