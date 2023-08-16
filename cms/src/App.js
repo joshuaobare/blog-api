@@ -5,6 +5,7 @@ import SignUp from "./components/SignUp";
 import NavBar from "./components/NavBar";
 import FullPost from "./components/FullPost";
 import CreatePost from "./components/CreatePost";
+import EditPost from "./components/EditPost";
 import { HashRouter, Routes, Route, BrowserRouter } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -15,7 +16,6 @@ function App() {
     password: "",
   });
   const [loginError, setLoginError] = useState(false)
-  const [editPost, setEditPost] = useState(false)
   
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -71,6 +71,7 @@ function App() {
           <Route path="/signup" exact element={<SignUp />} />
           <Route path="/post" exact element={<CreatePost />} />
           <Route path="/posts/post/:id" element={<FullPost />} />
+          <Route path="/posts/edit/:id" element={<EditPost />} />
         </Routes>
       </BrowserRouter>
     </div>

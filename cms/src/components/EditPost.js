@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-export default function EditPost() {
+export default function EditPost(props) {
   const [formData, setFormData] = useState({
     title: "",
     text: "",
@@ -10,12 +11,23 @@ export default function EditPost() {
 
   const [authToken, setAuthToken] = useState("");
   const [username, setUserName] = useState("");
-
+  const { id } = useParams();
+  
+  
   useEffect(() => {
+    const fetchData = async () => {
+      const postResponse = await fetch(`http://localhost:3000/posts/post/${id}`)
+      const post = await postResponse.json()      
+      setFormData(post.post)
+      setFormData((prevState) => ({ ...prevState, authorName: userData.name }));
+      
+    }
+
     setAuthToken(localStorage.getItem("token"));
     const userData = JSON.parse(localStorage.getItem("user"));
-    setFormData((prevState) => ({ ...prevState, authorName: userData.name }));
-  }, []);
+    fetchData()
+    
+  }, [id]);
 
   const handleChange = (e) => {
     const { name, value, type } = e.target;
@@ -29,7 +41,7 @@ export default function EditPost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try{
-      const response = await fetch("http://localhost:3000/admin/post", {
+      const response = await fetch(`http://localhost:3000/admin/post/${id}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",
@@ -44,6 +56,7 @@ export default function EditPost() {
         published: false,
         authorName: "",
       })
+    
 
     } catch(err){
       console.error(err)
@@ -53,7 +66,7 @@ export default function EditPost() {
 
   return (
     <div className="create-post">
-      <h1>Create Post</h1>
+      <h1>Update Post</h1>
       <form method="post" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="title">Title</label>
@@ -69,7 +82,7 @@ export default function EditPost() {
         <div className="form-group">
           <label htmlFor="text">Text</label>
           <textarea
-            className="form-control"
+            className="form-control post-form-textarea"
             type="text"
             name="text"
             id="text"

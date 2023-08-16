@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Comment from "./Comment";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -64,7 +64,9 @@ export default function FullPost(props) {
         </div>
       </div>
       <div className="full-post-edit-btn-cont">
+        <Link to={`/posts/edit/${id}`}>
         <button className="btn btn-danger">Edit Post</button>
+        </Link>        
       </div>
       <p className="full-post-text">{postData.text}</p>
       <h3>Comments</h3>

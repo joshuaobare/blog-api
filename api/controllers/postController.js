@@ -66,7 +66,7 @@ exports.update_post = [
       res.json({ errors: errors.array() });
       return;
     } else {
-      await post.save();
+      await post.exec();
       res.json({ message: "Post updated successfully" });
     }
   }),
