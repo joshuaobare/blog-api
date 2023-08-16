@@ -18,7 +18,7 @@ export default function Post(props) {
           </div>
 
           <Link to={`/posts/post/${props.post._id}`}>
-            <Card.Link href="#">Read Post</Card.Link>
+            <div>Read Post</div>
           </Link>
         </Card.Body>
       </Card>
