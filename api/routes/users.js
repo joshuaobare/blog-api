@@ -5,20 +5,6 @@ const postController = require("../controllers/postController");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 
-const verifyToken = (req, res, next) => {
-  const bearerHeader = req.headers["authorization"];
-
-  if (typeof bearerHeader !== "undefined") {
-    const bearer = bearerHeader.split(" ");
-
-    const bearerToken = bearer[1];
-
-    req.token = bearerToken;
-    next();
-  } else {
-    res.sendStatus(403);
-  }
-};
 router.post("/create", userController.create_user);
 router.post("/login", userController.login_user);
 router.post("/post",passport.authenticate("jwt", { session: false }), postController.create_post);
