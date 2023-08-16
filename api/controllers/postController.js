@@ -18,26 +18,6 @@ exports.post_get = asyncHandler(async (req, res, next) => {
   res.json({ post, comments });
 });
 
-exports.create_comment = [
-  body("text").isLength({ min: 1 }).withMessage("Comment too short"),
-
-  asyncHandler(async (req, res, next) => {
-    const errors = validationResult(req);
-    const { text, postId } = req.body;
-
-    const comment = new Comment({
-      text,
-      postId,
-    });
-
-    if (!errors.isEmpty()) {
-      res.json({ errors: errors.array() });
-      return;
-    } else {
-      await comment.save();
-    }
-  }),
-];
 
 exports.create_post = [
   body("title").trim().escape().isLength({ min: 1 }),
