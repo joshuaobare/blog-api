@@ -45,14 +45,14 @@ exports.create_post = [
 
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
-    const { text, title } = req.body;
+    const { text, title, authorName, published } = req.body;
 
     console.log(req.user)
 
     const post = new Post({
       text,
       title,
-      authorName: "name",
+      authorName,
       published,
     });
 

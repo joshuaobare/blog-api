@@ -12,6 +12,8 @@ const passport = require("passport");
 const User = require("./models/userModel");
 const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken')
+const JWTstrategy = require("passport-jwt").Strategy;
+const ExtractJWT = require("passport-jwt").ExtractJwt;
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
@@ -57,6 +59,22 @@ passport.use(
         return done(null, user);
       } catch (err) {
         return done(err);
+      }
+    }
+  )
+);
+
+passport.use(
+  new JWTstrategy(
+    {
+      secretOrKey: 'secretkey',
+      jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+    },
+    async (token, done) => {
+      try {
+        return done(null, token.user);
+      } catch (error) {
+        done(error);
       }
     }
   )

@@ -9,9 +9,12 @@ export default function CreatePost() {
   });
 
   const [authToken, setAuthToken] = useState("");
+  const [username, setUserName] = useState("");
 
   useEffect(() => {
-    setAuthToken(localStorage.getItem("token"))
+    setAuthToken(localStorage.getItem("token"));
+    const userData = JSON.parse(localStorage.getItem("user"));
+    setFormData((prevState) => ({ ...prevState, authorName: userData.name }));
   }, []);
 
   const handleChange = (e) => {
@@ -29,7 +32,7 @@ export default function CreatePost() {
       method: "POST",
       headers: {
         "Content-type": "application/json",
-        "Authorization": `Bearer ${authToken}`
+        "Authorization": `Bearer ${authToken}`,
       },
       body: JSON.stringify(formData),
     });
