@@ -47,10 +47,12 @@ exports.create_post = [
     const errors = validationResult(req);
     const { text, title } = req.body;
 
+    console.log(req.user)
+
     const post = new Post({
       text,
       title,
-      authorName: req.user.name,
+      authorName: "name",
       published,
     });
 

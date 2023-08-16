@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function CreatePost() {
   const [formData, setFormData] = useState({
@@ -8,21 +8,40 @@ export default function CreatePost() {
     authorName: "",
   });
 
+  const [authToken, setAuthToken] = useState("");
+
+  useEffect(() => {
+    setAuthToken(localStorage.getItem("token"))
+  }, []);
+
   const handleChange = (e) => {
-    const { name, value , type } = e.target;
+    const { name, value, type } = e.target;
 
     setFormData((prevState) => ({
       ...prevState,
-      [name]: type==='radio'? eval(value) : value,
+      [name]: type === "radio" ? eval(value) : value,
     }));
-    
   };
-  console.log(formData)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch("http://localhost:3000/admin/post", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        "Authorization": `Bearer ${authToken}`
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await response.json();
+    console.log(data);
+  };
 
   return (
     <div className="create-post">
       <h1>Create Post</h1>
-      <form action="">
+      <form method="post" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="title">Title</label>
           <input
@@ -49,12 +68,12 @@ export default function CreatePost() {
           <fieldset>
             <legend>published</legend>
             <label htmlFor="published">Yes</label>
-            <input 
-              type="radio" 
-              onChange={handleChange} 
-              value={true} 
-              name="published" 
-              id="published" 
+            <input
+              type="radio"
+              onChange={handleChange}
+              value={true}
+              name="published"
+              id="published"
             />
             <label htmlFor="unpublished">No</label>
             <input
