@@ -55,7 +55,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter basename="/admin">
-        <NavBar />
+        <NavBar loggedIn={loggedIn}/>
         <Routes>
           <Route
             path="/"
