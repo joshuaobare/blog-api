@@ -9,7 +9,7 @@ export default function NavBar(props) {
       <Navbar bg="dark" data-bs-theme="dark">
         <Container>
           <Link to="/">
-            <Navbar.Brand href="#home">EchoesCMS</Navbar.Brand>
+            <Navbar.Brand>EchoesCMS</Navbar.Brand>
           </Link>
 
           <Nav className="me-auto">

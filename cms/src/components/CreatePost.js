@@ -28,17 +28,27 @@ export default function CreatePost() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:3000/admin/post", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        "Authorization": `Bearer ${authToken}`,
-      },
-      body: JSON.stringify(formData),
-    });
+    try{
+      const response = await fetch("http://localhost:3000/admin/post", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          "Authorization": `Bearer ${authToken}`,
+        },
+        body: JSON.stringify(formData),
+      });
 
-    const data = await response.json();
-    console.log(data);
+      setFormData({
+        title: "",
+        text: "",
+        published: false,
+        authorName: "",
+      })
+
+    } catch(err){
+      console.error(err)
+    }
+        
   };
 
   return (

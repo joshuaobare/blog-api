@@ -3,6 +3,7 @@ import Login from "./components/Login";
 import Home from "./components/Home";
 import SignUp from "./components/SignUp";
 import NavBar from "./components/NavBar";
+import FullPost from "./components/FullPost";
 import CreatePost from "./components/CreatePost";
 import { HashRouter, Routes, Route, BrowserRouter } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -68,6 +69,7 @@ function App() {
           />
           <Route path="/signup" exact element={<SignUp />} />
           <Route path="/post" exact element={<CreatePost />} />
+          <Route path="/posts/post/:id" element={<FullPost />} />
         </Routes>
       </BrowserRouter>
     </div>
