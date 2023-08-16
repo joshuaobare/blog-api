@@ -49,6 +49,17 @@ export default function FullPost(props) {
   return (
     <div className="full-post">
       <h1>{postData.title}</h1>
+      <div className="full-post-byline">
+        <div><b>{postData.authorName}</b> <span className="full-post-author-span">Contributor</span> </div>
+        <div>
+          {new Date(postData.timestamp).toLocaleDateString("en-us", {
+            weekday: "long",
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          })}
+        </div>
+      </div>
       <p className="full-post-text">{postData.text}</p>
       <h3>Comments</h3>
       {postComments.length !== 0 ? (

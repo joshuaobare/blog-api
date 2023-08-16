@@ -86,6 +86,16 @@
   gap: 10px;
 }
 
+.full-post-byline {
+  display: flex;
+  justify-content: space-between;
+  width: 68vw;
+  padding: 10px;
+}
+
+.full-post-author-span {
+  font-size: 14px;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

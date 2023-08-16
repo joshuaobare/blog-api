@@ -18,11 +18,7 @@ export default function Home(props) {
     <div>
       <h1>All Posts</h1>
       <div className="posts-grid">
-        {posts.map((post) => {
-          if (post.published === true) {
-            return <Post key={uniqid()} post={post} />;
-          }
-        })}
+        {posts.map((post) => <Post key={uniqid()} post={post} />)}
       </div>
     </div>
   );
