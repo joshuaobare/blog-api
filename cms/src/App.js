@@ -11,11 +11,6 @@ import { useState, useEffect } from "react";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [loginFormData, setLoginFormData] = useState({
-    email: "",
-    password: "",
-  });
-  const [loginError, setLoginError] = useState(false);  
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -48,33 +43,50 @@ function App() {
     }
   };
 
-   useEffect(() => {}, [loggedIn]);
+  useEffect(() => {}, [loggedIn]);
+
+  const userLogout = async () => {
+    try {
+      const request = await fetch("http://localhost:3000/admin/logout", {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
+      const response = await request.json();
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      setLoggedIn(false);
+
+      console.log(response);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <div className="App">
       <BrowserRouter basename="/admin">
-        <NavBar loggedIn={loggedIn} />
-        
-        <Routes>
-          <Route
-            path="/"
-            exact
-            element={
-              loggedIn ? (
-                <Home />
-              ) : (
-                <Login loginHandleSubmit={loginHandleSubmit} />
-              )
-            }
-          />
-          <Route path="/signup" exact element={<SignUp />} />
-          <Route path="/post" exact element={<CreatePost />} />
-          <Route
-            path="/posts/post/:id"
-            element={<FullPost />}
-          />
-          <Route path="/posts/edit/:id" element={<EditPost />} />
-        </Routes>
+        <NavBar loggedIn={loggedIn} userLogout={userLogout} />
+        <div className="app-cms">
+          <Routes>
+            <Route
+              path="/"
+              exact
+              element={
+                loggedIn ? (
+                  <Home />
+                ) : (
+                  <Login loginHandleSubmit={loginHandleSubmit} />
+                )
+              }
+            />
+            <Route path="/signup" exact element={<SignUp />} />
+            <Route path="/post" exact element={<CreatePost />} />
+            <Route path="/posts/post/:id" element={<FullPost />} />
+            <Route path="/posts/edit/:id" element={<EditPost />} />
+          </Routes>
+        </div>
       </BrowserRouter>
     </div>
   );

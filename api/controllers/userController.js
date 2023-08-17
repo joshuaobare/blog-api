@@ -51,7 +51,7 @@ exports.create_user = [
 ];
 
 exports.login_user = asyncHandler(async (req, res, next) => {
-  passport.authenticate("local", async (err, user, info) => {    
+  passport.authenticate("local", async (err, user, info) => {
     try {
       if (err || !user) {
         const error = new Error("An error occurred.");
@@ -60,7 +60,7 @@ exports.login_user = asyncHandler(async (req, res, next) => {
       }
 
       req.login(user, { session: false }, async (error) => {
-        if (error) return next(error);        
+        if (error) return next(error);
         jwt.sign({ user: req.user }, "secretkey", (err, token) => {
           res.json({ token, user: JSON.stringify(req.user) });
         });
@@ -71,6 +71,12 @@ exports.login_user = asyncHandler(async (req, res, next) => {
   })(req, res, next);
 });
 
-exports.logout_user = function(req,res) {
-  req.logout()
-}
+exports.logout_user = (req, res, next) => {
+  req.logout(function (err) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    res.json({message: "Successfully logged out"});
+  });
+};

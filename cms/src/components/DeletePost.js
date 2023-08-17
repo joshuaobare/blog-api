@@ -21,7 +21,7 @@ export default function DeletePost(props) {
           <div className="modal-footer delete-modal-btn-cont">
             <button
               type="button"
-              class="btn btn-danger"
+              className="btn btn-danger"
               onClick={props.deletePost}
             >
               Delete

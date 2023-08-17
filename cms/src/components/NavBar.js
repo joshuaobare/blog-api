@@ -16,11 +16,13 @@ export default function NavBar(props) {
             <Link className="nav-item nav-link active" to="/">
               Home
             </Link>
+            {props.loggedIn ? (
             <Link className="nav-item nav-link" to="/post">
               Create Post
             </Link>
+            ) : null}
             {props.loggedIn ? (
-              <Link className="nav-item nav-link" to="/logout">
+              <Link className="nav-item nav-link" to="/" onClick={props.userLogout}>
                 Logout
               </Link>
             ) : null}
