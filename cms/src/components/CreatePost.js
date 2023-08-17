@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function CreatePost() {
   const [formData, setFormData] = useState({
@@ -10,6 +11,7 @@ export default function CreatePost() {
 
   const [authToken, setAuthToken] = useState("");
   const [username, setUserName] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     setAuthToken(localStorage.getItem("token"));
@@ -28,12 +30,12 @@ export default function CreatePost() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try{
+    try {
       const response = await fetch("http://localhost:3000/admin/post", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
-          "Authorization": `Bearer ${authToken}`,
+          Authorization: `Bearer ${authToken}`,
         },
         body: JSON.stringify(formData),
       });
@@ -43,12 +45,11 @@ export default function CreatePost() {
         text: "",
         published: false,
         authorName: "",
-      })
-
-    } catch(err){
-      console.error(err)
+      });
+      navigate("/");
+    } catch (err) {
+      console.error(err);
     }
-        
   };
 
   return (

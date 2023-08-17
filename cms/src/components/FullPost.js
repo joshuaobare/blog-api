@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import Comment from "./Comment";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -12,6 +12,8 @@ export default function FullPost(props) {
   const { id } = useParams();
   const [newComment, setNewComment] = useState({ text: "", postId: id });
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [authToken, setAuthToken] = useState("");
+  const navigate = useNavigate();
 
   const fetchPostData = async () => {
     const postResponse = await fetch(`http://localhost:3000/posts/post/${id}`);
@@ -22,6 +24,7 @@ export default function FullPost(props) {
 
   useEffect(() => {
     fetchPostData();
+    setAuthToken(localStorage.getItem("token"));
   }, []);
 
   const handleChange = (e) => {
@@ -48,8 +51,28 @@ export default function FullPost(props) {
     }
   };
 
+  const deletePost = async (e) => {
+    try {
+      const request = await fetch(`http://localhost:3000/admin/post/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
+
+      const response = await request.json();
+      console.log(response);
+      setDeleteDialogOpen((prevState) => !prevState);
+      navigate("/")
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const dialogToggle = () => {
     setDeleteDialogOpen((prevState) => !prevState);
+    
   };
 
   return (
@@ -110,9 +133,13 @@ export default function FullPost(props) {
           <button className="btn btn-primary">Submit</button>
         </div>
       </form>
-      
-        <DeletePost deleteDialogOpen={deleteDialogOpen} dialogToggle={dialogToggle} />
-      
+
+      <DeletePost
+        deleteDialogOpen={deleteDialogOpen}
+        dialogToggle={dialogToggle}
+        postId={id}
+        deletePost={deletePost}
+      />
     </div>
   );
 }
