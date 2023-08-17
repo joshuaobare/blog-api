@@ -19,6 +19,7 @@ exports.create_comment = [
         return;
       } else {
         await comment.save();
+        res.json({message:"comment created successfully"})
       }
     }),
   ];
