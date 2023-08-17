@@ -128,6 +128,11 @@
 .navbar.navbar-expand-lg.navbar-dark.bg-dark {
   padding: 10px;
 }
+
+.modal-footer.delete-modal-btn-cont {
+  display: flex;
+  gap: 20px;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

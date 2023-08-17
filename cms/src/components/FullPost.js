@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import Comment from "./Comment";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import DeletePost from "./DeletePost";
 
 export default function FullPost(props) {
   const [postData, setPostData] = useState({});
@@ -10,6 +11,7 @@ export default function FullPost(props) {
   const [postId, setPostId] = useState("");
   const { id } = useParams();
   const [newComment, setNewComment] = useState({ text: "", postId: id });
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
   const fetchPostData = async () => {
     const postResponse = await fetch(`http://localhost:3000/posts/post/${id}`);
@@ -46,6 +48,10 @@ export default function FullPost(props) {
     }
   };
 
+  const dialogToggle = () => {
+    setDeleteDialogOpen((prevState) => !prevState);
+  };
+
   return (
     <div className="full-post">
       <h1>{postData.title}</h1>
@@ -65,14 +71,14 @@ export default function FullPost(props) {
       </div>
       <div className="full-post-edit-btn-cont">
         <Link to={`/posts/edit/${id}`}>
-        <button className="btn btn-danger">Edit Post</button>
-        </Link>        
+          <button className="btn btn-danger">Edit Post</button>
+        </Link>
       </div>
       <p className="full-post-text">{postData.text}</p>
       <div className="full-post-edit-btn-cont">
-        <Link to={`/posts/edit/${id}`}>
-        <button className="btn btn-danger">Delete Post</button>
-        </Link>        
+        <button className="btn btn-danger" onClick={dialogToggle}>
+          Delete Post
+        </button>
       </div>
       <h3>Comments</h3>
       <div className="full-post-comments">
@@ -85,7 +91,7 @@ export default function FullPost(props) {
         )}
       </div>
 
-      <form onSubmit={handleSubmit} className="full-post-form" method='post'>
+      <form onSubmit={handleSubmit} className="full-post-form" method="post">
         <div className="form-group">
           <label htmlFor="text">
             <b>Add Comment</b>
@@ -104,6 +110,9 @@ export default function FullPost(props) {
           <button className="btn btn-primary">Submit</button>
         </div>
       </form>
+      
+        <DeletePost deleteDialogOpen={deleteDialogOpen} dialogToggle={dialogToggle} />
+      
     </div>
   );
 }

@@ -15,8 +15,8 @@ function App() {
     email: "",
     password: "",
   });
-  const [loginError, setLoginError] = useState(false)
-  
+  const [loginError, setLoginError] = useState(false);  
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     const userData = localStorage.getItem("user");
@@ -39,23 +39,22 @@ function App() {
       if (response.status === 200) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", data.user);
-        setLoggedIn(true)
-      }else {
-        console.log(data)
+        setLoggedIn(true);
+      } else {
+        console.log(data);
       }
     } catch (err) {
       console.error(err);
     }
   };
 
-  useEffect(()=>{
-
-  },[loggedIn])
+   useEffect(() => {}, [loggedIn]);
 
   return (
     <div className="App">
       <BrowserRouter basename="/admin">
-        <NavBar loggedIn={loggedIn}/>
+        <NavBar loggedIn={loggedIn} />
+        
         <Routes>
           <Route
             path="/"
@@ -70,7 +69,10 @@ function App() {
           />
           <Route path="/signup" exact element={<SignUp />} />
           <Route path="/post" exact element={<CreatePost />} />
-          <Route path="/posts/post/:id" element={<FullPost />} />
+          <Route
+            path="/posts/post/:id"
+            element={<FullPost />}
+          />
           <Route path="/posts/edit/:id" element={<EditPost />} />
         </Routes>
       </BrowserRouter>
