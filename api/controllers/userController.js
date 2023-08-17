@@ -70,3 +70,7 @@ exports.login_user = asyncHandler(async (req, res, next) => {
     }
   })(req, res, next);
 });
+
+exports.logout_user = function(req,res) {
+  req.logout()
+}
