@@ -80,7 +80,8 @@
   justify-content: center;
   align-items: center;
 }
-.login-form, .signup-form {
+.login-form,
+.signup-form {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -97,14 +98,14 @@
   font-size: 14px;
 }
 
-.full-post-edit-btn-cont{
+.full-post-edit-btn-cont {
   width: 68vw;
   display: flex;
   justify-content: flex-end;
   margin-bottom: 10px;
 }
 
-.Comment{
+.Comment {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -139,7 +140,21 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.commenter {
+  display: flex;
+  justify-content: flex-start;
+  font-size: smaller;
+  font-weight: bolder;
+  font-style: italic;
+}
 
+.comment-date {
+  font-size: smaller;
+}
+
+.comment-text {
+  width: 25vw;
 }
 @keyframes App-logo-spin {
   from {

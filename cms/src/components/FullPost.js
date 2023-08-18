@@ -18,7 +18,7 @@ export default function FullPost(props) {
 
   const fetchPostData = async () => {
     const postResponse = await fetch(`http://localhost:3000/api/post/${id}`);
-    const post = await postResponse.json();
+    const post = await postResponse.json();    
     console.log(post)
     setPostData(post.post);
     setPostComments(post.comments);
@@ -30,8 +30,8 @@ export default function FullPost(props) {
   }, []);
 
   useEffect(() => {
-
-  }, [postData])
+    
+  }, [postData, postComments])
 
 
 
@@ -82,7 +82,7 @@ export default function FullPost(props) {
   };
    
 
-  const deleteComment = async (e, commentId) => {    
+  const deleteComment = async (e, commentId) => {        
     try {      
       const request = await fetch(`http://localhost:3000/api/post/comment/${commentId}`, {
         method: "DELETE",
@@ -94,10 +94,7 @@ export default function FullPost(props) {
 
       const response = await request.json();
       console.log(response);
-      setCommentDeleted(true)
-      console.log(commentDeleted)
-      setCommentDeleted(false)
-      console.log(commentDeleted)
+      fetchPostData()
     } catch (err) {
       console.log(err);
     }
