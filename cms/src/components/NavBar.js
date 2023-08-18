@@ -10,6 +10,18 @@ export default function NavBar(props) {
         <Link className="navbar-brand" to="/">
           EchoesCMS
         </Link>
+        <button
+          id="nav-btn"
+          className="navbar-toggler navbar-toggler-right"
+          type="button"
+          data-toggle="collapse"
+          data-target=".navbar-collapse"
+          aria-controls=".navbar-collapse"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
 
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav">
@@ -17,18 +29,21 @@ export default function NavBar(props) {
               Home
             </Link>
             {props.loggedIn ? (
-            <Link className="nav-item nav-link" to="/post">
-              Create Post
-            </Link>
+              <Link className="nav-item nav-link" to="/post">
+                Create Post
+              </Link>
             ) : null}
             {props.loggedIn ? (
-              <Link className="nav-item nav-link" to="/" onClick={props.userLogout}>
+              <Link
+                className="nav-item nav-link"
+                to="/"
+                onClick={props.userLogout}
+              >
                 Logout
               </Link>
             ) : null}
           </div>
         </div>
-        
       </nav>
     </>
   );
