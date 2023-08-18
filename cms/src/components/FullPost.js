@@ -18,6 +18,7 @@ export default function FullPost(props) {
   const fetchPostData = async () => {
     const postResponse = await fetch(`http://localhost:3000/posts/post/${id}`);
     const post = await postResponse.json();
+    console.log(post)
     setPostData(post.post);
     setPostComments(post.comments);
   };
@@ -36,16 +37,14 @@ export default function FullPost(props) {
   const handleSubmit = async (e) => {
     try {
       console.log(id);
-      const response = await fetch(`http://localhost:3000/posts/post/comment`, {
+      const response = await fetch("http://localhost:3000/posts/post/comment", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
         },
         body: JSON.stringify(newComment),
       });
-      if (response.status !== 200) {
-        return;
-      }
+      
     } catch (err) {
       console.log(err);
     }
@@ -114,7 +113,7 @@ export default function FullPost(props) {
         )}
       </div>
 
-      <form onSubmit={handleSubmit} className="full-post-form" method="post" action="">
+      <form onSubmit={handleSubmit} className="full-post-form" method="post">
         <div className="form-group">
           <label htmlFor="text">
             <b>Add Comment</b>

@@ -9,4 +9,6 @@ router.get("/post/:id", postController.post_get)
 
 router.post("/post/comment", commentController.create_comment)
 
+router.delete("/post/comment/:id", commentController.delete_comment)
+
 module.exports = router;
