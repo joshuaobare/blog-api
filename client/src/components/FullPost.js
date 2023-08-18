@@ -12,7 +12,7 @@ export default function FullPost(props) {
   const [newComment, setNewComment] = useState({ text: "", postId: id });
 
   const fetchPostData = async () => {
-    const postResponse = await fetch(`http://localhost:3000/posts/post/${id}`);
+    const postResponse = await fetch(`http://localhost:3000/api/post/${id}`);
     const post = await postResponse.json();
     setPostData(post.post);
     setPostComments(post.comments);
@@ -32,7 +32,7 @@ export default function FullPost(props) {
     e.preventDefault()
     try {
       console.log(id);
-      const response = await fetch(`http://localhost:3000/posts/post/comment`, {
+      const response = await fetch(`http://localhost:3000/api/post/comment`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",

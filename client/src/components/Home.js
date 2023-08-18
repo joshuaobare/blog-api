@@ -10,7 +10,7 @@ export default function Home(props) {
   }, []);
 
   const fetchPosts = async () => {
-    const postsResponse = await fetch("http://localhost:3000/posts");
+    const postsResponse = await fetch("http://localhost:3000/api/posts");
     const posts = await postsResponse.json();
     setPosts(posts);
   };
