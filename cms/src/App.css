@@ -166,6 +166,9 @@
   }
 }
 @media (max-width: 600px) {
+  .app-cms {
+    margin-top: 20px;
+  }
   .posts-grid {
     flex-direction: column;
     margin-bottom: 20px;
@@ -193,4 +196,7 @@
   .login {
     width: 90vw;
   }
+  .navbar-collapse.in {
+    display: block !important;
+}
 }
