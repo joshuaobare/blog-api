@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import uniqid from "uniqid";
 import Post from "./Post.js";
+import Hero from "./Hero.js"
 
 export default function Home(props) {
   const [posts, setPosts] = useState([]);
@@ -16,6 +17,7 @@ export default function Home(props) {
   };
   return (
     <div>
+      <Hero />
       <h1>All Posts</h1>
       <div className="posts-grid">
         {posts.map((post) => {
