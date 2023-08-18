@@ -33,7 +33,9 @@ async function main() {
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
-app.use(cors());
+app.use(cors({
+  origin: ["https://fly.io/apps/lively-moon-2540", process.env.ORIGIN],
+}));
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
