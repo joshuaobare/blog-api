@@ -29,6 +29,7 @@ export default function FullPost(props) {
   };
 
   const handleSubmit = async (e) => {
+    e.preventDefault()
     try {
       console.log(id);
       const response = await fetch(`http://localhost:3000/posts/post/comment`, {
@@ -38,9 +39,8 @@ export default function FullPost(props) {
         },
         body: JSON.stringify(newComment),
       });
-      if (response.status !== 200) {
-        return;
-      }
+      setNewComment({ text: "", postId: id })
+      fetchPostData()
     } catch (err) {
       console.log(err);
     }
