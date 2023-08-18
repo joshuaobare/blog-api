@@ -24,7 +24,7 @@ function App() {
   const loginHandleSubmit = async (e, userData) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3000/admin/login", {
+      const response = await fetch("http://localhost:3000/api/login", {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(userData),
@@ -47,7 +47,7 @@ function App() {
 
   const userLogout = async () => {
     try {
-      const request = await fetch("http://localhost:3000/admin/logout", {
+      const request = await fetch("http://localhost:3000/api/logout", {
         method: "GET",
         headers: {
           "Content-type": "application/json",

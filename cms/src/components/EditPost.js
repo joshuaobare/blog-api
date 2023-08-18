@@ -16,7 +16,7 @@ export default function EditPost(props) {
   
   useEffect(() => {
     const fetchData = async () => {
-      const postResponse = await fetch(`http://localhost:3000/posts/post/${id}`)
+      const postResponse = await fetch(`http://localhost:3000/api/post/${id}`)
       const post = await postResponse.json()      
       setFormData(post.post)
       setFormData((prevState) => ({ ...prevState, authorName: userData.name }));
@@ -41,7 +41,7 @@ export default function EditPost(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try{
-      const response = await fetch(`http://localhost:3000/admin/post/${id}`, {
+      const response = await fetch(`http://localhost:3000/api/post/${id}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",

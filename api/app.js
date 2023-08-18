@@ -18,6 +18,7 @@ const ExtractJWT = require("passport-jwt").ExtractJwt;
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const postsRouter = require("./routes/posts");
+const apiRouter = require("./routes/api")
 
 const app = express();
 
@@ -106,6 +107,7 @@ app.use(function (req, res, next) {
 app.use("/", indexRouter);
 app.use("/admin", usersRouter);
 app.use("/posts", postsRouter);
+app.use("/api", apiRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

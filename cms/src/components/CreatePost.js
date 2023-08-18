@@ -31,7 +31,7 @@ export default function CreatePost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3000/admin/post", {
+      const response = await fetch("http://localhost:3000/api/post", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
