@@ -1,7 +1,7 @@
 {
   "name": "cms",
   "version": "0.1.0",
-  "homepage": "https://joshuaobare.github.io/blog-api/cms",
+  "homepage": "https://joshuaobare.github.io/blog-cms",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.1",
