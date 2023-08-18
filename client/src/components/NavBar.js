@@ -16,9 +16,6 @@ export default function NavBar(props) {
             <Link to="/">
               <Nav.Link href="#home">Home</Nav.Link>
             </Link>
-
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

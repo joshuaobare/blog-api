@@ -59,6 +59,7 @@
 
 .full-post-form {
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .full-post-text {
@@ -162,5 +163,33 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+@media (max-width: 600px) {
+  .posts-grid {
+    flex-direction: column;
+  }
+  .full-post-text {
+    width: 90vw;
+  }
+  .full-post-byline {
+    width: 90vw;
+    gap: 20vw;
+  }
+  .comment-text {
+    width: 90vw;
+  }
+  textarea.form-control {
+    width: 90vw;
+  }
+  .full-post-edit-btn-cont {
+    width: 90vw;
+  }
+
+  .Comment {
+    flex-direction: column;
+  }
+  .login {
+    width: 90vw;
   }
 }

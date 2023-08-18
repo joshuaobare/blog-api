@@ -28,9 +28,7 @@ export default function NavBar(props) {
             ) : null}
           </div>
         </div>
-        <Link className="nav-item nav-link" to="/logout">
-          Logout
-        </Link>
+        
       </nav>
     </>
   );

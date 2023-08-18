@@ -8,11 +8,8 @@ export default function Hero() {
       <div className="mask mask-hero" >
         <div className="d-flex justify-content-center align-items-center h-100">
           <div className="text-white">
-            <h1 className="mb-3">Heading</h1>
-            <h4 className="mb-3">Subheading</h4>
-            <a className="btn btn-outline-light btn-lg" href="#!" role="button">
-              Call to action
-            </a>
+            <h1 className="mb-3">Echoes</h1>
+            <h5 className="mb-3"><i>Come shout into the void</i></h5>            
           </div>
         </div>
       </div>

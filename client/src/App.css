@@ -55,6 +55,7 @@
 
 .full-post-form {
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .full-post-text {
@@ -110,7 +111,7 @@
 }
 
 .client-hero {
-  background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp');
+  background-image: url("https://mdbcdn.b-cdn.net/img/new/slides/041.webp");
   background-size: 100%;
   height: 40vh;
 }
@@ -118,11 +119,38 @@
 .mask-hero {
   background-color: rgba(0, 0, 0, 0.6);
 }
+.home-posts-section-title {
+  margin-top: 20px;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
+  }
+}
+@media (max-width: 600px) {
+  .posts-grid {
+    flex-direction: column;
+  }
+  .client-hero {
+    background-image: url("https://mdbcdn.b-cdn.net/img/new/slides/041.webp");
+    background-size: 200%;
+    height: 40vh;
+  }
+
+  .full-post-text {
+    width: 90vw;
+  }
+  .full-post-byline {
+    width: 90vw;
+    gap: 20vw;
+  }
+  .comment-text {
+    width: 90vw;
+  }
+  textarea.form-control {
+    width: 90vw;
   }
 }
