@@ -24,7 +24,7 @@ function App() {
   const loginHandleSubmit = async (e, userData) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3000/api/login", {
+      const response = await fetch("https://lively-moon-2540.fly.dev/api/login", {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(userData),
@@ -47,7 +47,7 @@ function App() {
 
   const userLogout = async () => {
     try {
-      const request = await fetch("http://localhost:3000/api/logout", {
+      const request = await fetch("https://lively-moon-2540.fly.dev/api/logout", {
         method: "GET",
         headers: {
           "Content-type": "application/json",
@@ -66,7 +66,7 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter basename="/admin">
+      <HashRouter basename="/admin">
         <NavBar loggedIn={loggedIn} userLogout={userLogout} />
         <div className="app-cms">
           <Routes>
@@ -87,7 +87,7 @@ function App() {
             <Route path="/posts/edit/:id" element={<EditPost />} />
           </Routes>
         </div>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }

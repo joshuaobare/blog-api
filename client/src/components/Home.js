@@ -11,7 +11,7 @@ export default function Home(props) {
   }, []);
 
   const fetchPosts = async () => {
-    const postsResponse = await fetch("http://localhost:3000/api/posts");
+    const postsResponse = await fetch("https://lively-moon-2540.fly.dev/api/posts");
     const posts = await postsResponse.json();
     setPosts(posts);
   };

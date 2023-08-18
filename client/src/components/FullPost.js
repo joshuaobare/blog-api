@@ -12,7 +12,7 @@ export default function FullPost(props) {
   const [newComment, setNewComment] = useState({ text: "", postId: id });
 
   const fetchPostData = async () => {
-    const postResponse = await fetch(`http://localhost:3000/api/post/${id}`);
+    const postResponse = await fetch(`https://lively-moon-2540.fly.dev/api/post/${id}`);
     const post = await postResponse.json();
     setPostData(post.post);
     setPostComments(post.comments);
@@ -32,7 +32,7 @@ export default function FullPost(props) {
     e.preventDefault()
     try {
       console.log(id);
-      const response = await fetch(`http://localhost:3000/api/post/comment`, {
+      const response = await fetch(`https://lively-moon-2540.fly.dev/api/post/comment`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",

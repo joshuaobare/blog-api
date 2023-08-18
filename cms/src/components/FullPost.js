@@ -17,7 +17,7 @@ export default function FullPost(props) {
   const [commentDeleted, setCommentDeleted] = useState(false)
 
   const fetchPostData = async () => {
-    const postResponse = await fetch(`http://localhost:3000/api/post/${id}`);
+    const postResponse = await fetch(`https://lively-moon-2540.fly.dev/api/post/${id}`);
     const post = await postResponse.json();    
     console.log(post)
     setPostData(post.post);
@@ -45,7 +45,7 @@ export default function FullPost(props) {
     e.preventDefault()
     try {
       console.log(id);
-      const request = await fetch("http://localhost:3000/api/post/comment", {
+      const request = await fetch("https://lively-moon-2540.fly.dev/api/post/comment", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -64,7 +64,7 @@ export default function FullPost(props) {
 
   const deletePost = async (e) => {
     try {
-      const request = await fetch(`http://localhost:3000/api/post/${id}`, {
+      const request = await fetch(`https://lively-moon-2540.fly.dev/api/post/${id}`, {
         method: "DELETE",
         headers: {
           "Content-type": "application/json",
@@ -84,7 +84,7 @@ export default function FullPost(props) {
 
   const deleteComment = async (e, commentId) => {        
     try {      
-      const request = await fetch(`http://localhost:3000/api/post/comment/${commentId}`, {
+      const request = await fetch(`https://lively-moon-2540.fly.dev/api/post/comment/${commentId}`, {
         method: "DELETE",
         headers: {
           "Content-type": "application/json",

@@ -21,7 +21,7 @@ export default function SignUp() {
     e.preventDefault();
     try {
       console.log("response");
-      const response = await fetch("http://localhost:3000/api/user", {
+      const response = await fetch("https://lively-moon-2540.fly.dev/api/user", {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(userData),

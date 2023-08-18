@@ -10,14 +10,14 @@ import { HashRouter, Routes, Route, BrowserRouter } from "react-router-dom";
 function App() {
   return (
     <div className="App">
-      <BrowserRouter basename="/">
+      <HashRouter basename="/">
         <NavBar />
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="/posts/post/:id" element={<FullPost />} />
           
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }
