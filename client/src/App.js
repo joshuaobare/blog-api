@@ -10,7 +10,7 @@ import { HashRouter, Routes, Route, BrowserRouter } from "react-router-dom";
 function App() {
   return (
     <div className="App">
-      <HashRouter basename="/">
+      <HashRouter basename="/blog">
         <NavBar />
         <Routes>
           <Route path="/" exact element={<Home />} />
