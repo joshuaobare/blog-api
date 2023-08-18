@@ -14,6 +14,7 @@ export default function FullPost(props) {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [authToken, setAuthToken] = useState("");
   const navigate = useNavigate();
+  const [commentDeleted, setCommentDeleted] = useState(false)
 
   const fetchPostData = async () => {
     const postResponse = await fetch(`http://localhost:3000/posts/post/${id}`);
@@ -28,6 +29,12 @@ export default function FullPost(props) {
     setAuthToken(localStorage.getItem("token"));
   }, []);
 
+  useEffect(() => {
+
+  }, [postData])
+
+
+
   const handleChange = (e) => {
     setNewComment((prevState) => {
       return { ...prevState, [e.target.name]: e.target.value };
@@ -35,16 +42,21 @@ export default function FullPost(props) {
   };
 
   const handleSubmit = async (e) => {
+    e.preventDefault()
     try {
       console.log(id);
-      const response = await fetch("http://localhost:3000/posts/post/comment", {
+      const request = await fetch("http://localhost:3000/posts/post/comment", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
         },
         body: JSON.stringify(newComment),
       });
-      
+
+      const response = await request.json()
+      console.log(response)
+      setNewComment({ text: "", postId: id })
+      fetchPostData()
     } catch (err) {
       console.log(err);
     }
@@ -68,6 +80,30 @@ export default function FullPost(props) {
       console.log(err);
     }
   };
+   
+
+  const deleteComment = async (e, commentId) => {    
+    try {      
+      const request = await fetch(`http://localhost:3000/admin/post/comment/${commentId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
+
+      const response = await request.json();
+      console.log(response);
+      setCommentDeleted(true)
+      console.log(commentDeleted)
+      setCommentDeleted(false)
+      console.log(commentDeleted)
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+useEffect(()=> {}, [commentDeleted])
 
   const dialogToggle = () => {
     setDeleteDialogOpen((prevState) => !prevState);
@@ -106,7 +142,7 @@ export default function FullPost(props) {
       <div className="full-post-comments">
         {postComments.length !== 0 ? (
           postComments.map((comment) => (
-            <Comment key={comment._id} comment={comment} />
+            <Comment key={comment._id} id={comment._id} comment={comment} deleteComment={deleteComment} />
           ))
         ) : (
           <div>No Comments</div>
@@ -120,13 +156,11 @@ export default function FullPost(props) {
           </label>
           <textarea
             onChange={handleChange}
-            value={newComment.text}
-            type="text"
+            value={newComment.text}            
             className="form-control text"
             name="text"
             id="text"
-          ></textarea>
-          <input type="hidden" name="postId" value={id} />
+          ></textarea>          
         </div>
         <div className="form-group">
           <button className="btn btn-primary">Submit</button>
